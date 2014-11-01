@@ -1,3 +1,5 @@
+package com.thirteen.sa.softwarearchitecturecom;
+
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.res.AssetManager;
