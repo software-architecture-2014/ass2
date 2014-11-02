@@ -77,7 +77,7 @@ public class DAO {
                 null, // leaving "columns" null just returns all the columns.
                 null, // cols for "where" clause
                 null, // values for "where" clause
-                null, // columns to group by
+                SQLiteHelper.COLUMN_NAME, // columns to group by
                 null, // columns to filter by row groups
                 SQLiteHelper.COLUMN_NAME  // sort order
         );

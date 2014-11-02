@@ -8,5 +8,6 @@
     <string name="title_activity_view_all_stations">ViewAllStationsActivity</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_all_stations">All stations</string>
+    <string name="filter_all_stations_hint">Search</string>
 
 </resources>
