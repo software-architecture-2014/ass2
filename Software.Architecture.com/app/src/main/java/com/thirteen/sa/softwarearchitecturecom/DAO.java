@@ -3,7 +3,6 @@ package com.thirteen.sa.softwarearchitecturecom;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -68,10 +67,35 @@ public class DAO {
         return all_stops;
     }
 
+    // Returns all stops from DB.
+    public ArrayList<Stop> getAllStops()
+    {
+        ArrayList<Stop> all_stops = new ArrayList<Stop>();
+
+        Cursor weatherCursor = mySQLiteDB.query(
+                SQLiteHelper.TABLE_NAME,  // Table to Query
+                null, // leaving "columns" null just returns all the columns.
+                null, // cols for "where" clause
+                null, // values for "where" clause
+                null, // columns to group by
+                null, // columns to filter by row groups
+                SQLiteHelper.COLUMN_NAME  // sort order
+        );
+
+        weatherCursor.moveToFirst();
+        while (!weatherCursor.isAfterLast())
+        {
+            all_stops.add(makeCursorToStop(weatherCursor));
+            weatherCursor.moveToNext();
+        }
+
+        return all_stops;
+    }
+
     //Converts a Cursor Object to a Stop
     // TODO Complete the Statement (now only NAME is handled)
     private Stop makeCursorToStop(Cursor cursor)
     {
-        return new Stop(cursor.getString(0));
+        return new Stop(cursor.getString(cursor.getColumnIndex(SQLiteHelper.COLUMN_NAME)));
     }
 }

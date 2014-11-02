@@ -1,27 +1,15 @@
 package com.thirteen.sa.softwarearchitecturecom;
 
 import android.app.Activity;
-import android.app.ActionBar;
 import android.app.Fragment;
-import android.content.ContentProviderClient;
-import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Color;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.os.Build;
-import android.view.inputmethod.EditorInfo;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import java.util.ArrayList;
 
 
 public class SearchActivity extends Activity {
@@ -80,6 +68,10 @@ public class SearchActivity extends Activity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_settings) {
+            return true;
+        }
+        if (id == R.id.action_all_stations) {
+            startActivity(new Intent(this, ViewAllStationsActivity.class));
             return true;
         }
         return super.onOptionsItemSelected(item);
