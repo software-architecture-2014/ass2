@@ -20,6 +20,14 @@
             android:name=".ViewAllStationsActivity"
             android:label="@string/title_activity_view_all_stations" >
         </activity>
+        <activity
+            android:name=".AddNewLine"
+            android:label="@string/title_activity_add_new_line"
+            android:parentActivityName=".SearchActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.thirteen.sa.softwarearchitecturecom.SearchActivity" />
+        </activity>
     </application>
 
 </manifest>

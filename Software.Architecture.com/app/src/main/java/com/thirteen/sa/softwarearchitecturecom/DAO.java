@@ -92,6 +92,47 @@ public class DAO {
         return all_stops;
     }
 
+    // Get all Names from DB
+    public ArrayList<String> getAllNames()
+    {
+        ArrayList<String> all_names = new ArrayList<String>();
+
+        Cursor nameCursor = mySQLiteDB.query(
+                SQLiteHelper.TABLE_NAME,  // Table to Query
+                null, // leaving "columns" null just returns all the columns.
+                null, // cols for "where" clause
+                null, // values for "where" clause
+                SQLiteHelper.COLUMN_NAME, // columns to group by
+                null, // columns to filter by row groups
+                SQLiteHelper.COLUMN_NAME  // sort order
+        );
+
+        nameCursor.moveToFirst();
+        while (!nameCursor.isAfterLast())
+        {
+            all_names.add(makeCursorToStop(nameCursor).get_name());
+            nameCursor.moveToNext();
+        }
+
+        return all_names;
+    }
+
+    public int getIdByName (String Name)
+    {
+        int id;
+
+        final String SELECT_STATEMENT= "SELECT " + SQLiteHelper.COLUMN_ID  + " FROM "
+                + SQLiteHelper.TABLE_NAME + " WHERE " + SQLiteHelper.COLUMN_NAME + " = ?";
+
+        Cursor idCursor = mySQLiteDB.rawQuery(SELECT_STATEMENT,new String[] {Name});
+
+        if (idCursor.getCount() == 0)
+            return 0;
+        idCursor.moveToFirst();
+        return idCursor.getInt(0);
+
+    }
+
     //Converts a Cursor Object to a Stop
     // TODO Complete the Statement (now only NAME is handled)
     private Stop makeCursorToStop(Cursor cursor)

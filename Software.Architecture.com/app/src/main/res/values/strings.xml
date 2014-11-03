@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Software.Architecture.com</string>
+    <string name="app_name">AFP</string>
     <string name="FROM">From:</string>
     <string name="TO">To:</string>
     <string name="action_settings">Settings</string>
@@ -9,5 +9,8 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_all_stations">All stations</string>
     <string name="filter_all_stations_hint">Search</string>
+    <string name="add">add</string>
+    <string name="accept">accept</string>
+    <string name="title_activity_add_new_line">AddNewLine</string>
 
 </resources>
