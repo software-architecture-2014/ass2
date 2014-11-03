@@ -9,8 +9,8 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_all_stations">All stations</string>
     <string name="filter_all_stations_hint">Search</string>
-    <string name="add">add</string>
-    <string name="accept">accept</string>
+    <string name="add">add new line</string>
+    <string name="accept">Save</string>
     <string name="title_activity_add_new_line">AddNewLine</string>
 
 </resources>

@@ -6,5 +6,5 @@
         android:id="@+id/accept"
         android:icon="@drawable/ic_action_accept"
         android:title="@string/accept"
-        android:showAsAction="ifRoom"></item>
+        android:showAsAction="always"></item>
 </menu>
