@@ -5,6 +5,7 @@ import android.content.ContextWrapper;
 import android.content.res.AssetManager;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -20,19 +21,35 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
     public static final String DB_NAME = "SA.db";
 
-    public static final String TABLE_NAME = "STOPS";
+    public static final String STOPS_TABLE_NAME = "STOPS";
+    public static final String ROUTES_TABLE_NAME = "ROUTES";
+    public static final String MAPPING_TABLE_NAME = "MAPPING";
 
-    public static final String COLUMN_ID = "_id";
-    public static final String COLUMN_LAT = "_lat";
-    public static final String COLUMN_LON = "_lon";
-    public static final String COLUMN_NAME = "_name";
+    public static final String STOPS_ID = "_id";
+    public static final String STOPS_LAT = "_lat";
+    public static final String STOPS_LON = "_lon";
+    public static final String STOPS_NAME = "_name";
 
-    private static final String CREATE_STATEMENT = "create table " + TABLE_NAME
-            + "(" + COLUMN_ID
-            + " integer primary key, " + COLUMN_LON
-            + " text not null, " + COLUMN_LAT
-            + " text not null, " + COLUMN_NAME
+    public static final String ROUTES_ID = "_id";
+    public static final String ROUTES_NAME = "_name";
+
+    public static final String MAPPING_ROUTES_ID = "_routes_id";
+    public static final String MAPPING_STOPS_ID = "_stops_id";
+
+    private static final String CREATE_STOP = "create table " + STOPS_TABLE_NAME
+            + "(" + STOPS_ID
+            + " integer primary key, " + STOPS_LON
+            + " text not null, " + STOPS_LAT
+            + " text not null, " + STOPS_NAME
             + " text not null);";
+    private static final  String CREATE_ROUTES = "create table " + ROUTES_TABLE_NAME
+            + "(" + ROUTES_ID
+            +" integer primary key, " + ROUTES_NAME
+            + "text not null);";
+    private static final String CREATE_MAPPING = "create table " + MAPPING_TABLE_NAME
+            + "(" + MAPPING_ROUTES_ID
+            +" integer, " + MAPPING_STOPS_ID
+            + "integer);";
 
     public SQLiteHelper(Context context)
     {
@@ -43,7 +60,9 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase mySQL)
     {
-        mySQL.execSQL(CREATE_STATEMENT);
+        mySQL.execSQL(CREATE_STOP);
+        mySQL.execSQL(CREATE_ROUTES);
+        mySQL.execSQL(CREATE_MAPPING);
 
         AssetManager my_asset_manager = my_context.getAssets();
         BufferedReader my_buffered_reader = null;
@@ -66,6 +85,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase mySQL, int oldversion, int newversion)
     {
+        mySQL.execSQL("DROP TABLE IF EXISTS ");
         onCreate(mySQL);
     }
 }

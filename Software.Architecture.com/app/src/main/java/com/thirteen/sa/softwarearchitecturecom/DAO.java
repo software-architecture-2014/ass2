@@ -45,8 +45,8 @@ public class DAO {
     public ArrayList<Stop> getStopsByName(String name)
     {
         // The Statement as String (SELECT _name FROM STOPS WHERE _name = ?
-        final String SELECT_STATEMENT= "SELECT " + SQLiteHelper.COLUMN_NAME + " FROM "
-                + SQLiteHelper.TABLE_NAME + " WHERE " + SQLiteHelper.COLUMN_NAME + " = ?";
+        final String SELECT_STATEMENT= "SELECT " + SQLiteHelper.STOPS_NAME + " FROM "
+                + SQLiteHelper.STOPS_TABLE_NAME + " WHERE " + SQLiteHelper.STOPS_NAME + " = ?";
         ArrayList<Stop> all_stops = new ArrayList<Stop>();
 
         String[] filter = {name}; // After what should we filter (THE PARAMETER)
@@ -73,13 +73,13 @@ public class DAO {
         ArrayList<Stop> all_stops = new ArrayList<Stop>();
 
         Cursor weatherCursor = mySQLiteDB.query(
-                SQLiteHelper.TABLE_NAME,  // Table to Query
+                SQLiteHelper.STOPS_TABLE_NAME,  // Table to Query
                 null, // leaving "columns" null just returns all the columns.
                 null, // cols for "where" clause
                 null, // values for "where" clause
-                SQLiteHelper.COLUMN_NAME, // columns to group by
+                SQLiteHelper.STOPS_NAME, // columns to group by
                 null, // columns to filter by row groups
-                SQLiteHelper.COLUMN_NAME  // sort order
+                SQLiteHelper.STOPS_NAME  // sort order
         );
 
         weatherCursor.moveToFirst();
@@ -98,13 +98,13 @@ public class DAO {
         ArrayList<String> all_names = new ArrayList<String>();
 
         Cursor nameCursor = mySQLiteDB.query(
-                SQLiteHelper.TABLE_NAME,  // Table to Query
+                SQLiteHelper.STOPS_TABLE_NAME,  // Table to Query
                 null, // leaving "columns" null just returns all the columns.
                 null, // cols for "where" clause
                 null, // values for "where" clause
-                SQLiteHelper.COLUMN_NAME, // columns to group by
+                SQLiteHelper.STOPS_NAME, // columns to group by
                 null, // columns to filter by row groups
-                SQLiteHelper.COLUMN_NAME  // sort order
+                SQLiteHelper.STOPS_NAME  // sort order
         );
 
         nameCursor.moveToFirst();
@@ -121,8 +121,8 @@ public class DAO {
     {
         int id;
 
-        final String SELECT_STATEMENT= "SELECT " + SQLiteHelper.COLUMN_ID  + " FROM "
-                + SQLiteHelper.TABLE_NAME + " WHERE " + SQLiteHelper.COLUMN_NAME + " = ?";
+        final String SELECT_STATEMENT= "SELECT " + SQLiteHelper.STOPS_ID  + " FROM "
+                + SQLiteHelper.STOPS_TABLE_NAME + " WHERE " + SQLiteHelper.STOPS_NAME + " = ?";
 
         Cursor idCursor = mySQLiteDB.rawQuery(SELECT_STATEMENT,new String[] {Name});
 
@@ -137,6 +137,6 @@ public class DAO {
     // TODO Complete the Statement (now only NAME is handled)
     private Stop makeCursorToStop(Cursor cursor)
     {
-        return new Stop(cursor.getString(cursor.getColumnIndex(SQLiteHelper.COLUMN_NAME)));
+        return new Stop(cursor.getString(cursor.getColumnIndex(SQLiteHelper.STOPS_NAME)));
     }
 }
