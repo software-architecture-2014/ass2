@@ -119,8 +119,6 @@ public class DAO {
 
     public int getIdByName (String Name)
     {
-        int id;
-
         final String SELECT_STATEMENT= "SELECT " + SQLiteHelper.STOPS_ID  + " FROM "
                 + SQLiteHelper.STOPS_TABLE_NAME + " WHERE " + SQLiteHelper.STOPS_NAME + " = ?";
 
@@ -131,6 +129,22 @@ public class DAO {
         idCursor.moveToFirst();
         return idCursor.getInt(0);
 
+    }
+
+    public String[] getLatLon(int id)
+    {
+        String[] retVal = new String[2];
+
+        final String SELECT_STATEMENT = "SELECT " + SQLiteHelper.STOPS_LAT + ", " + SQLiteHelper.STOPS_LON
+                + " FROM " + SQLiteHelper.STOPS_TABLE_NAME + " WHERE " + SQLiteHelper.STOPS_ID + " = ?";
+        Cursor lonLatCursor = mySQLiteDB.rawQuery(SELECT_STATEMENT, new String[] {Integer.toString(id)});
+        if (lonLatCursor.getCount() == 0)
+            return null;
+
+        lonLatCursor.moveToFirst();
+        retVal[0] = lonLatCursor.getString(0);
+        retVal[1] = lonLatCursor.getString(1);
+        return retVal;
     }
 
     public ArrayList<String> getAllLines(String from, String to)

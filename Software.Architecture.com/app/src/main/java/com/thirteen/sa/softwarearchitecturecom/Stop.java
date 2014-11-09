@@ -8,15 +8,27 @@ package com.thirteen.sa.softwarearchitecturecom;
 public class Stop {
 
     private String _name;
+    private String _lat;
+    private String _lon;
 
+    public Stop(String name, String lat, String lon)
+    {
+        _name = name; _lat = lat; _lon = lon;
+    }
     public Stop(String name)
     {
-        _name = name;
+        _name = name; _lat = ""; _lon = "";
     }
-
-
     public String get_name()
     {
         return _name;
+    }
+    public String get_lat()
+    {
+        return _lat;
+    }
+    public String get_lon()
+    {
+        return _lon;
     }
 }

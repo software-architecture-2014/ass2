@@ -2,6 +2,7 @@ package com.thirteen.sa.softwarearchitecturecom;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -14,7 +15,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-
 
 public class SearchActivity extends Activity {
 
@@ -68,8 +68,16 @@ public class SearchActivity extends Activity {
             Toast.makeText(this, "No such Stop!", Toast.LENGTH_LONG).show();
             return;
         }
+        String[] lonLatFrom = myDataAccessObject.getLatLon(idFrom);
+        String[] lonLatTo   = myDataAccessObject.getLatLon(idTo);
 
-        Toast.makeText(this, "SEARCH " + idFrom + " " + idTo, Toast.LENGTH_LONG).show();
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW);
+        Uri geoLoc = Uri.parse("http://maps.google.com/maps?saddr=" + lonLatFrom[0] + "," +
+                lonLatFrom[1] + "&daddr=" + lonLatTo[0] + "," + lonLatTo[1]);
+        mapIntent.setData(geoLoc);
+        if (mapIntent.resolveActivity(getPackageManager()) != null) {
+            startActivity(mapIntent);
+        }
     }
 
 
