@@ -12,5 +12,6 @@
     <string name="add">add new line</string>
     <string name="accept">Save</string>
     <string name="title_activity_add_new_line">AddNewLine</string>
+    <string name="imageButton">Add a Stop to the new Line</string>
 
 </resources>

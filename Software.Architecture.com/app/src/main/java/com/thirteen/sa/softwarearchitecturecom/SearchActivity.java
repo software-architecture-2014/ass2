@@ -1,29 +1,18 @@
 package com.thirteen.sa.softwarearchitecturecom;
 
 import android.app.Activity;
-import android.app.Fragment;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
-import java.io.FileReader;
 import java.util.ArrayList;
 
 
@@ -31,11 +20,7 @@ public class SearchActivity extends Activity {
 
     private DAO myDataAccessObject;
 
-    private ArrayAdapter<String> autoComplete;
     private ArrayList<String> allNames;
-
-    private String From;
-    private String To;
 
     private static final int REQUEST_CODE = 1;
 
@@ -50,7 +35,7 @@ public class SearchActivity extends Activity {
         }
 
         allNames = myDataAccessObject.getAllNames();
-
+        ArrayAdapter<String> autoComplete;
         autoComplete = new ArrayAdapter<String>(this,
                 R.layout.list_item_stations,
                 R.id.list_item_stations_textview,
@@ -70,8 +55,8 @@ public class SearchActivity extends Activity {
         AutoCompleteTextView editTextFrom = (AutoCompleteTextView) findViewById(R.id.editFrom);
         AutoCompleteTextView editTextTo = (AutoCompleteTextView) findViewById(R.id.editTo);
 
-        From = editTextFrom.getText().toString();
-        To = editTextTo.getText().toString();
+        String From = editTextFrom.getText().toString();
+        String To = editTextTo.getText().toString();
 
         if (From.length() == 0 || To.length() == 0) {
             Toast.makeText(this, "Fill Fields!", Toast.LENGTH_LONG).show();
@@ -107,7 +92,9 @@ public class SearchActivity extends Activity {
             return true;
         }
         if (id == R.id.add) {
-            startActivityForResult(new Intent(this, AddNewLine.class), REQUEST_CODE);
+            Intent add = new Intent(this, AddNewLine.class);
+            add.putExtra("ADAPTER",allNames);
+            startActivityForResult(add, REQUEST_CODE);
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -116,7 +103,6 @@ public class SearchActivity extends Activity {
     public class SearchListener implements TextView.OnEditorActionListener {
         @Override
         public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-            boolean handled = false;
 
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 performSearch();
@@ -132,8 +118,17 @@ public class SearchActivity extends Activity {
         {
             if (resultCode == RESULT_OK)
             {
+                if (data.getIntExtra("COUNT",0) < 2) {
+                    Toast.makeText(this, "You need to add at least two stops!", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 String name = data.getStringExtra("NAME");
-                Toast.makeText(this,name,Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "NAME: " + name, Toast.LENGTH_LONG).show();
+                String stops[] = new String[data.getIntExtra("COUNT",0)];
+                for (int i = 0; i<data.getIntExtra("COUNT",0);i++){
+                    stops[i] = data.getStringExtra("STOP " + i);
+                    Toast.makeText(this,stops[i],Toast.LENGTH_LONG).show();
+                }
             }
             else if (resultCode == RESULT_CANCELED)
             {

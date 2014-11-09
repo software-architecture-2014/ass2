@@ -1,4 +1,4 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -6,13 +6,24 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.thirteen.sa.softwarearchitecturecom.AddNewLine">
+    tools:context="com.thirteen.sa.softwarearchitecturecom.AddNewLine"
+    android:id="@+id/addLayout"
+    android:orientation="vertical">
 
     <EditText
-        android:id="@+id/todo"
-        android:hint="TODO"
-        android:layout_width="fill_parent"
+        android:id="@+id/Name"
+        android:hint="Name"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+    <ImageButton
 
-</RelativeLayout>
+        android:id="@+id/btnAddStop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_action_new"
+        android:title="@string/imageButton"
+        android:layout_centerHorizontal="true"
+        android:onClick="addStopLine"
+        android:layout_gravity="center_horizontal" />
+</LinearLayout>

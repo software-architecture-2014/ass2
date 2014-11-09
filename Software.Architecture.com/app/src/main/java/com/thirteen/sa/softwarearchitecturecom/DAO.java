@@ -133,6 +133,14 @@ public class DAO {
 
     }
 
+    public ArrayList<String> getAllLines(String from, String to)
+    {
+        ArrayList<String> retVal = new ArrayList<String>();
+
+
+        return retVal;
+    }
+
     //Converts a Cursor Object to a Stop
     // TODO Complete the Statement (now only NAME is handled)
     private Stop makeCursorToStop(Cursor cursor)
