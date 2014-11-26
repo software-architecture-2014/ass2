@@ -1,0 +1,58 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.thirteen.sa.softwarearchitecturecom.BrowseLatLon$PlaceholderFragment">
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/latButton"
+        android:layout_alignParentEnd="true"
+        android:text=">"
+        />
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/lonButton"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@id/latButton"
+        android:text=">"
+        />
+
+    <EditText
+        android:id="@+id/lat"
+        android:hint="@string/lat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toStartOf="@id/latButton"
+        />
+    <EditText
+        android:id="@+id/lon"
+        android:hint="@string/lon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lat"
+        android:layout_toStartOf="@id/lonButton"/>
+
+    <Button
+        android:id="@+id/SearchLatLon"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lonButton"
+        android:text="@string/Search"/>
+
+    <ListView
+        android:id="@+id/ListLatLon"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/SearchLatLon"/>
+
+
+
+
+</RelativeLayout>

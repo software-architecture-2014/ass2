@@ -1,20 +1,15 @@
 package com.thirteen.sa.softwarearchitecturecom;
 
 import android.content.Context;
-import android.content.ContextWrapper;
 import android.content.res.AssetManager;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 
-/**
- * Created by franco on 01.11.14.
- */
+
 public class SQLiteHelper extends SQLiteOpenHelper {
 
     Context my_context;
@@ -45,11 +40,11 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     private static final  String CREATE_ROUTES = "create table " + ROUTES_TABLE_NAME
             + "(" + ROUTES_ID
             +" integer primary key, " + ROUTES_NAME
-            + "text not null);";
+            + " text not null);";
     private static final String CREATE_MAPPING = "create table " + MAPPING_TABLE_NAME
             + "(" + MAPPING_ROUTES_ID
             +" integer, " + MAPPING_STOPS_ID
-            + "integer);";
+            + " integer);";
 
     public SQLiteHelper(Context context)
     {
@@ -65,12 +60,12 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         mySQL.execSQL(CREATE_MAPPING);
 
         AssetManager my_asset_manager = my_context.getAssets();
-        BufferedReader my_buffered_reader = null;
+        BufferedReader my_buffered_reader;
 
         try {
             my_buffered_reader = new BufferedReader(new InputStreamReader(my_asset_manager.open("SQLFile"),"UTF8"));
 
-            String execute_insert = "";
+            String execute_insert;
 
             while ((execute_insert = my_buffered_reader.readLine()) != null){
                 mySQL.execSQL(execute_insert);

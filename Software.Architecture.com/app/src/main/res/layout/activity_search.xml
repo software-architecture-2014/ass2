@@ -26,5 +26,11 @@
         android:layout_below="@+id/editFrom"
         android:inputType="text"
         android:imeOptions="actionSearch"/>
+    <ListView
+        android:id="@+id/Routes"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editTo"
+        />
 
 </RelativeLayout>

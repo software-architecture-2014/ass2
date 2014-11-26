@@ -23,10 +23,12 @@ public class ViewAllStationsActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        AllStationsListFragment myFrag = new AllStationsListFragment();
+        myFrag.setStations(getIntent().getStringArrayListExtra("ADAPTER"));
         setContentView(R.layout.activity_view_all_stations);
         if (savedInstanceState == null) {
             getFragmentManager().beginTransaction()
-                    .add(R.id.container, new AllStationsListFragment())
+                    .add(R.id.container, myFrag)
                     .commit();
         }
     }
@@ -55,10 +57,15 @@ public class ViewAllStationsActivity extends Activity {
 
 
         private ArrayAdapter<String> stationNameAdapter;
-        private ArrayList<Stop> allStations;
+        private ArrayList<String> stations;
         private final String LOG_TAG = AllStationsListFragment.class.getSimpleName();
 
         public AllStationsListFragment() {
+        }
+
+        public void setStations(ArrayList<String> pStations)
+        {
+            stations = pStations;
         }
 
         @Override
@@ -68,22 +75,10 @@ public class ViewAllStationsActivity extends Activity {
         }
 
         private void initStationAdapter() {
-            /*
-            * Populates stationNameAdapter with all station names.
-            */
-            DAO myDataAccessObject = new DAO(getActivity());
 
-            if (!myDataAccessObject.open())
+            for (String current_stop : stations)
             {
-                Log.d("FEHLER", "Not so good");
-                return;
-            }
-
-            allStations = myDataAccessObject.getAllStops();
-
-            for (Stop current_stop : allStations)
-            {
-                stationNameAdapter.add(current_stop.get_name());
+                stationNameAdapter.add(current_stop);
             }
         }
 
@@ -121,7 +116,6 @@ public class ViewAllStationsActivity extends Activity {
 
                 @Override
                 public void afterTextChanged(Editable s) {
-                    Log.i(LOG_TAG, "afterTextChanged called: " + s.toString());
                     stationNameAdapter.clear();
 
                     String filter_query = s.toString();
@@ -130,9 +124,9 @@ public class ViewAllStationsActivity extends Activity {
                         filter_query = filter_query.toUpperCase();
                     }
 
-                    for (Stop current_stop: allStations) {
-                        if (current_stop.get_name().toUpperCase().startsWith(filter_query)) {
-                            stationNameAdapter.add(current_stop.get_name());
+                    for (String current_stop: stations) {
+                        if (current_stop.toUpperCase().startsWith(filter_query)) {
+                            stationNameAdapter.add(current_stop);
                         }
                     }
 

@@ -5,4 +5,8 @@
         android:title="@string/action_all_stations"
         android:orderInCategory="0"
         android:showAsAction="never" />
+    <item android:id="@+id/action_lat_lon"
+        android:title="@string/title_activity_browse_lat_lon"
+        android:showAsAction="never"
+        android:orderInCategory="1"/>
 </menu>

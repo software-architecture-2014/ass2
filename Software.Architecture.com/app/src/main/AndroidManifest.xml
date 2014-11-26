@@ -6,9 +6,10 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
+        android:screenOrientation="portrait"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".SearchActivity"
+            android:name="com.thirteen.sa.softwarearchitecturecom.SearchActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -17,20 +18,29 @@
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <data android:scheme="geo" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".ViewAllStationsActivity"
+            android:name="com.thirteen.sa.softwarearchitecturecom.ViewAllStationsActivity"
             android:label="@string/title_activity_view_all_stations"
-            android:parentActivityName=".SearchActivity">
-
+            android:parentActivityName="com.thirteen.sa.softwarearchitecturecom.SearchActivity" >
         </activity>
         <activity
-            android:name=".AddNewLine"
+            android:name="com.thirteen.sa.softwarearchitecturecom.AddNewLine"
             android:label="@string/title_activity_add_new_line"
-            android:parentActivityName=".SearchActivity" >
+            android:parentActivityName="com.thirteen.sa.softwarearchitecturecom.SearchActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.thirteen.sa.softwarearchitecturecom.SearchActivity" />
+        </activity>
+        <activity
+            android:name="com.thirteen.sa.softwarearchitecturecom.BrowseLatLon"
+            android:label="@string/title_activity_browse_lat_lon"
+            android:parentActivityName="com.thirteen.sa.softwarearchitecturecom.SearchActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.thirteen.sa.softwarearchitecturecom.SearchActivity" />

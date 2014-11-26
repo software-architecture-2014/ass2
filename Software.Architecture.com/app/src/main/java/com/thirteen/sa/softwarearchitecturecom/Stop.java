@@ -1,5 +1,7 @@
 package com.thirteen.sa.softwarearchitecturecom;
 
+import java.io.Serializable;
+
 /**
  * Created by franco on 01.11.14.
  */
