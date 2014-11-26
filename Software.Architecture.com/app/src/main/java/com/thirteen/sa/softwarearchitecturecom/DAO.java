@@ -205,7 +205,7 @@ public class DAO {
     }
     private Stop makeCursorToStop(Cursor cursor)
     {
-        return new Stop(cursor.getString(3),cursor.getString(1),cursor.getString(2));
+        return new Stop(cursor.getString(3),cursor.getString(2),cursor.getString(1));
     }
 
     public void insertNewRoute(ArrayList<String> add)

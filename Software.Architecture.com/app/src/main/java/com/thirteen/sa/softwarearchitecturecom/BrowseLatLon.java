@@ -100,8 +100,15 @@ public class BrowseLatLon extends Activity {
                         String SearchLat = ((EditText) rootView.findViewById(R.id.lat)).getText().toString();
                         String SearchLon = ((EditText) rootView.findViewById(R.id.lon)).getText().toString();
 
+                        if (!checkIfCorrectInput(SearchLat) || !checkIfCorrectInput(SearchLon))
+                        {
+                            Toast.makeText(getActivity(),"This is not a correct Input!",Toast.LENGTH_LONG).show();
+                            return;
+                        }
+
                         boolean latSet = (SearchLat.length() != 0);
                         boolean lonSet = (SearchLon.length() != 0);
+
                         myAdap.clear();
 
                         if (latSet == true && lonSet == true)
@@ -191,5 +198,23 @@ public class BrowseLatLon extends Activity {
 
             return false;
         }
+    }
+    private static boolean checkIfCorrectInput(String input)
+    {
+        int countForPoint = 0;
+        for (int i = 0; i < input.length();i++)
+        {
+            if (input.charAt(i) > '0' && input.charAt(i) < '9')
+            {
+                continue;
+            }
+            else if (input.charAt(i) == '.' && countForPoint == 0)
+            {
+               countForPoint++;
+               continue;
+            }
+            else return false;
+        }
+        return true;
     }
 }
