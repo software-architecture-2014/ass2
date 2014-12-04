@@ -1,11 +1,5 @@
 package com.thirteen.sa.softwarearchitecturecom;
 
-import java.io.Serializable;
-
-/**
- * Created by franco on 01.11.14.
- */
-
 // Represents one single Stop (for testing purpose only name)
 public class Stop {
 

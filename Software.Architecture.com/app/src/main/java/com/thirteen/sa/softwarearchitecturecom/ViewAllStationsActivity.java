@@ -24,7 +24,7 @@ public class ViewAllStationsActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         AllStationsListFragment myFrag = new AllStationsListFragment();
-        myFrag.setStations(getIntent().getStringArrayListExtra("ADAPTER"));
+        myFrag.setStations(getIntent().getStringArrayListExtra(SearchActivity.KEY_INTENT));
         setContentView(R.layout.activity_view_all_stations);
         if (savedInstanceState == null) {
             getFragmentManager().beginTransaction()
@@ -46,7 +46,6 @@ public class ViewAllStationsActivity extends Activity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
         return super.onOptionsItemSelected(item);
     }
 
@@ -120,7 +119,7 @@ public class ViewAllStationsActivity extends Activity {
 
                     String filter_query = s.toString();
 
-                    if (filter_query != "") {
+                    if (!filter_query.equals("")) {
                         filter_query = filter_query.toUpperCase();
                     }
 

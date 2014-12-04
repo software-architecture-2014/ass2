@@ -2,21 +2,16 @@ package com.thirteen.sa.softwarearchitecturecom;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -47,6 +42,7 @@ public class AddNewLine extends Activity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
+        ArrayList<String> myStops = this.getIntent().getStringArrayListExtra(SearchActivity.KEY_INTENT);
         int id = item.getItemId();
         if (id == R.id.accept)
         {
@@ -58,16 +54,18 @@ public class AddNewLine extends Activity {
                 finish();
             }
             returnIntent.putExtra("NAME", name.getText().toString());
-            int howmanystops = 0;
-            for (int i = 0; i < myText.size();i++)
+            int how_many_stops = 0;
+            for (AutoCompleteTextView myTxtView : myText)
             {
-                if (myText.get(i).getText().length() != 0) {
-                    String tmp = myText.get(i).getText().toString();
-                    returnIntent.putExtra("STOP " + howmanystops, tmp);
-                    howmanystops++;
+                if (myTxtView.getText().length() != 0) {
+                    String tmp = myTxtView.getText().toString();
+                    if (myStops.contains(tmp)) {
+                        returnIntent.putExtra("STOP " + how_many_stops, tmp);
+                        how_many_stops++;
+                    }
                 }
             }
-            returnIntent.putExtra("COUNT",howmanystops);
+            returnIntent.putExtra("COUNT",how_many_stops);
 
             this.setResult(RESULT_OK,returnIntent);
             finish();
@@ -79,8 +77,7 @@ public class AddNewLine extends Activity {
     {
         RelativeLayout.LayoutParams myLayout = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT);
-        RelativeLayout.LayoutParams Button = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT);
+
         LinearLayout myRelativeLayout = (LinearLayout) findViewById(R.id.addLayout);
         myLayout.addRule(RelativeLayout.BELOW, R.id.Name);
 

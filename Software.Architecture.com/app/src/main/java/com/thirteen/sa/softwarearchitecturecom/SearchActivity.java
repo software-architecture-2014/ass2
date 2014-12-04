@@ -17,7 +17,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class SearchActivity extends Activity {
@@ -28,14 +27,17 @@ public class SearchActivity extends Activity {
     private Handler handleThread;
     private ProgressDialog myDialog;
 
-    private static final int REQUEST_CODE = 1;
-    private static final int RUN_READY = 2;
-    private static final int NO_SUCH_STOP = 3;
-    private static final int LIST_OF_LINES = 4;
-    private static final int INSERT_LINES = 5;
-    private static final int BROWSE_LAT_LON = 6;
+    private static final int REQUEST_CODE    = 1;
+    private static final int RUN_READY       = 2;
+    private static final int NO_SUCH_STOP    = 3;
+    private static final int LIST_OF_LINES   = 4;
+    private static final int INSERT_LINES    = 5;
+    private static final int NOT_CORRECT_ARG = 6;
+
+    public static final String KEY_INTENT = "ADAPTER";
 
     @Override
+    @SuppressWarnings("unchecked")
     protected void onCreate(Bundle savedInstanceState) {
         handleThread = new Handler(){
             @Override
@@ -80,6 +82,10 @@ public class SearchActivity extends Activity {
                     ListView myListView = (ListView) findViewById(R.id.Routes);
                     myListView.setAdapter(myRoutes);
                 }
+                else if (msg.what == NOT_CORRECT_ARG)
+                {
+                    Toast.makeText(getBaseContext(), "You need to add at least two stops!", Toast.LENGTH_LONG).show();
+                }
                 myDialog.dismiss();
             }
         };
@@ -122,6 +128,12 @@ public class SearchActivity extends Activity {
             @Override
             public void run() {
 
+                try {
+                    Thread.sleep(1000);
+                }catch (Exception e)
+                {
+                    Log.d("FEHLER","Code 2");
+                }
                 ArrayList<String> lines = myDataAccessObject.getLines(From, To);
                 if (lines == null)
                 {
@@ -135,19 +147,6 @@ public class SearchActivity extends Activity {
             }
         });
         linesThread.start();
-
-
-        /*
-        String[] lonLatFrom = myDataAccessObject.getLatLon(idFrom);
-        String[] lonLatTo   = myDataAccessObject.getLatLon(idTo);
-
-        Intent mapIntent = new Intent(Intent.ACTION_VIEW);
-        Uri geoLoc = Uri.parse("http://maps.google.com/maps?saddr=" + lonLatFrom[0] + "," +
-                lonLatFrom[1] + "&daddr=" + lonLatTo[0] + "," + lonLatTo[1]);
-        mapIntent.setData(geoLoc);
-        if (mapIntent.resolveActivity(getPackageManager()) != null) {
-            startActivity(mapIntent);
-        }*/
     }
 
     @Override
@@ -173,13 +172,13 @@ public class SearchActivity extends Activity {
         int id = item.getItemId();
         if (id == R.id.action_all_stations) {
             Intent browse = new Intent(this,ViewAllStationsActivity.class);
-            browse.putExtra("ADAPTER",allNames);
+            browse.putExtra(KEY_INTENT,allNames);
             startActivity(browse);
             return true;
         }
         else if (id == R.id.add) {
             Intent add = new Intent(this, AddNewLine.class);
-            add.putExtra("ADAPTER",allNames);
+            add.putExtra(KEY_INTENT,allNames);
             startActivityForResult(add, REQUEST_CODE);
             return true;
         }
@@ -216,7 +215,7 @@ public class SearchActivity extends Activity {
                     public void run() {
 
                         if (data.getIntExtra("COUNT",0) < 2) {
-                            Toast.makeText(getBaseContext(), "You need to add at least two stops!", Toast.LENGTH_LONG).show();
+                            handleThread.sendEmptyMessage(NOT_CORRECT_ARG);
                             return;
                         }
                         ArrayList<String> toAdd = new ArrayList<String>();
@@ -230,11 +229,10 @@ public class SearchActivity extends Activity {
                     }
                 });
                 insert.start();
-
             }
             else if (resultCode == RESULT_CANCELED)
             {
-                Toast.makeText(this,"Cancel",Toast.LENGTH_LONG).show();
+                Toast.makeText(this,"There is no name for your Route",Toast.LENGTH_LONG).show();
             }
         }
     }

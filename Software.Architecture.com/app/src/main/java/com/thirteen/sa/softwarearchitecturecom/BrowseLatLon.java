@@ -1,23 +1,19 @@
 package com.thirteen.sa.softwarearchitecturecom;
 
 import android.app.Activity;
-import android.app.ActionBar;
 import android.app.Fragment;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.os.Build;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 
@@ -111,7 +107,7 @@ public class BrowseLatLon extends Activity {
 
                         myAdap.clear();
 
-                        if (latSet == true && lonSet == true)
+                        if (latSet && lonSet)
                         {
                             for (Stop currentStop : myStopList)
                             {
@@ -121,7 +117,7 @@ public class BrowseLatLon extends Activity {
                                 }
                             }
                         }
-                        else if (latSet == true && lonSet == false)
+                        else if (latSet && !lonSet)
                         {
                             for (Stop currentStop : myStopList) {
                                 if (stringGreater(SearchLat, currentStop.get_lat()) == greaterLat) {
@@ -129,7 +125,7 @@ public class BrowseLatLon extends Activity {
                                 }
                             }
                         }
-                        else if (latSet == false && lonSet == true)
+                        else if (!latSet && lonSet)
                         {
                             for (Stop currentStop : myStopList) {
                                 if (stringGreater(SearchLon, currentStop.get_lon()) == greaterLon) {
@@ -150,7 +146,7 @@ public class BrowseLatLon extends Activity {
                 @Override
                 public void onClick(View v) {
                     Button tmp = (Button) v;
-                    if (tmp.getText().toString() == ">")
+                    if (tmp.getText().toString().equals(">"))
                     {
                         tmp.setText("<");
                     }
@@ -168,7 +164,7 @@ public class BrowseLatLon extends Activity {
                 @Override
                 public void onClick(View v) {
                     Button tmp = (Button) v;
-                    if (tmp.getText().toString() == ">")
+                    if (tmp.getText().toString().equals(">"))
                     {
                         tmp.setText("<");
                     }
@@ -182,7 +178,7 @@ public class BrowseLatLon extends Activity {
             return rootView;
         }
 
-        final private boolean stringGreater(String left, String right)
+        private boolean stringGreater(String left, String right)
         {
             for (int i = 0; i < left.length();i++)
             {
@@ -204,14 +200,13 @@ public class BrowseLatLon extends Activity {
         int countForPoint = 0;
         for (int i = 0; i < input.length();i++)
         {
-            if (input.charAt(i) > '0' && input.charAt(i) < '9')
+            if (input.charAt(i) >= '0' && input.charAt(i) <= '9')
             {
                 continue;
             }
             else if (input.charAt(i) == '.' && countForPoint == 0)
             {
                countForPoint++;
-               continue;
             }
             else return false;
         }

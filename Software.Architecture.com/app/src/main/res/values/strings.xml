@@ -2,8 +2,8 @@
 <resources>
 
     <string name="app_name">AFP</string>
-    <string name="FROM">From:</string>
-    <string name="TO">To:</string>
+    <string name="FROM">1. Stop:</string>
+    <string name="TO">2  .Stop:</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_view_all_stations">ViewAllStationsActivity</string>
     <string name="action_all_stations">All stations</string>
