@@ -1,0 +1,74 @@
+<RelativeLayout
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+xmlns:android="http://schemas.android.com/apk/res/android"
+android:paddingLeft="@dimen/activity_horizontal_margin"
+android:paddingRight="@dimen/activity_horizontal_margin"
+android:paddingTop="@dimen/activity_vertical_margin"
+android:paddingBottom="@dimen/activity_vertical_margin"
+tools:context="com.franco.general.tournament.Game"
+xmlns:tools="http://schemas.android.com/tools">
+    <ScrollView
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/currentGame"
+            >
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/player1"
+        />
+    <TextView
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/player2"
+        />
+    <TextView
+        android:id="@+id/start1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="501"
+        android:layout_below="@id/player1"/>
+    <TextView
+        android:id="@+id/start2"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="501"
+        android:layout_below="@id/player2"/>
+        </RelativeLayout>
+    </ScrollView>
+    <Button
+        android:text="next Throw"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="nextThrow"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/btnNextThrow"/>
+    <Button
+        android:id="@+id/btnRest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rest"
+        android:layout_below="@id/btnNextThrow"
+        android:layout_centerHorizontal="true"
+        android:onClick="setRest"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="no Score"
+        android:layout_below="@id/btnRest"
+        android:layout_centerHorizontal="true"
+        android:onClick="passThrow"
+        android:id="@+id/noScore"/>
+    <TextView
+        android:id="@+id/txtCurrentPlayer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/noScore"
+        android:layout_centerHorizontal="true"/>
+</RelativeLayout>

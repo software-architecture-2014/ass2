@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">Couple</string>
+
+    <string name="title_section1">Diary</string>
+    <string name="title_section2">Chat</string>
+    <string name="title_section3">Albums</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_example">Example action</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_main">Couple</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_main2">Main2Activity</string>
+
+    <string name="contentDelete">DeleteMenuItem</string>
+    <string name="contentEdit">EditMenuItem</string>
+    <string name="contentBack">BackMenuItem</string>
+
+    <string name="contentGalleryView">Album</string>
+
+    <string name="menuDelete">delete</string>
+    <string name="menuEdit">edit</string>
+    <string name="menuBack">back</string>
+
+    <string name="editCard">Write your entry:</string>
+    <string name="title_activity_new_entry">NewEntry</string>
+
+
+</resources>

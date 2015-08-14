@@ -1,0 +1,13 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:actionButtonStyle">@style/MyActionButtonStyle</item>
+    </style>
+
+    <style name="MyActionButtonStyle" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:minWidth">50dip</item>
+        <item name="android:padding">50dip</item>
+    </style>
+
+</resources>

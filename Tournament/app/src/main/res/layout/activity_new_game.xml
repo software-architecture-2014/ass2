@@ -1,0 +1,27 @@
+<ScrollView  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.franco.general.tournament.newGame">
+<RelativeLayout
+    android:id="@+id/newGame"
+    android:layout_height="fill_parent"
+    android:layout_width="fill_parent">
+    <Button
+        android:id="@+id/group1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="player to group 1"
+        android:onClick="newPlayer"/>
+
+    <Button
+        android:id="@+id/group2"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="player to group 2"
+        android:onClick="newPlayer"/>
+</RelativeLayout>
+</ScrollView>

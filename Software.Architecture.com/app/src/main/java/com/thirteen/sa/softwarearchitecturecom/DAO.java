@@ -81,6 +81,7 @@ public class DAO {
                 null, // columns to filter by row groups
                 null  // sort order
         );
+
         ArrayList<String> myIdForRoutes = new ArrayList<String>();
         FromRoutes.moveToFirst();
         while (!FromRoutes.isAfterLast())
